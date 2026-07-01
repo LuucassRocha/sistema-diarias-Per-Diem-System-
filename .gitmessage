@@ -1,0 +1,12 @@
+# .gitmessage
+# Tipo: [feat|fix|docs|style|refactor|test|chore|perf|ci|build]
+# Escopo: (opcional)
+# Descrição: 
+# 
+# Exemplos:
+# feat: add Google Maps integration
+# fix: resolve price calculation bug
+# docs: update API documentation
+# chore: update dependencies
+# refactor: improve error handling
+# test: add unit tests for DailyService
