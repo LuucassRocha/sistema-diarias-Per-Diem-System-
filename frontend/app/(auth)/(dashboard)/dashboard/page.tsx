@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from 'next/link';
 
+function formatName(name: string): string{
+    return name
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
 interface User {
     name: string;
     email: string;
@@ -75,7 +83,7 @@ export default function DashboardPage(){
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                     <h1 className="text-xl font-bold">Sistema de Diárias</h1>
                     <div className="flex items-center gap-4">
-                        <span>Olá, {user.name}</span>
+                        <span>Olá, {formatName(user.name)}</span>
                     </div>
                     <button
                         onClick={handleLogout}

@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database';
 import userRoutes from './routes/userRoutes';
+import dailyRoutes from './routes/dailyRoutes';
 
 // Load variables of enviroment
 dotenv.config();
@@ -38,6 +39,7 @@ app.get('/api/test', (req: Request, res: Response) => {
 });
 
 app.use('/api/users', userRoutes);
+app.use('/api/dailies', dailyRoutes);
 
 // Error handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

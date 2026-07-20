@@ -8,12 +8,32 @@ export class GoogleMapsService {
         this.apiKey = process.env.GOOGLE_MAPS_API_KEY!;
 
         //API Key validation
-        if(!this.apiKey){
-            throw new Error('GOOGLE_MAPS_API_KEY não configurada no .env');
+        if(!this.apiKey && process.env.NODE_ENV !== 'production'){
+            console.warn('GOOGLE_MAPS_API_KEY não configurada. Usando dados mockados');
         }
     }
 
     async getRouteDetails(origin: string, destination: string){
+        if (!this.apiKey){
+            console.log(' Usando dados mockados (sem API Key)');
+            return{
+                distance: 100,
+                duration: 60,
+                origin: {
+                    address: origin,
+                    city: 'São Paulo',
+                    state: 'SP',
+                    location: {lat: -23.55, lng: -46.63}
+                },
+                destination: {
+                    address: destination,
+                    city: 'Rio de Janeiro',
+                    state: 'RJ',
+                    location: {lat: -22.90, lng: -43.20}
+                }
+            };
+        }
+        
         try{
             const response = await axios.get(
                 `${this.baseUrl}/directions/json`,
@@ -135,7 +155,7 @@ export class GoogleMapsService {
                 }
             );
 
-            return response.data.perdictions.map((p: any) => p.description);
+            return response.data.predictions.map((p: any) => p.description);
         } catch(error) {
             console.error('Erro no autocomplete:', error);
             return [];

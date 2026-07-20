@@ -11,6 +11,20 @@ export class PriceService{
         return baseValue * bonusMultiplier;
     }
 
+    getCategory(state: string): 'MUNICIPIO' | 'CAPITAL' | 'DISTRITO_FEDERAL' {
+        const capitals = ['SP', 'RJ', 'MG', 'BA', 'PR', 'RS', 'PE', 'CE', 'PA', 'SC', 'GO', 'AM', 'ES', 'MT', 'MS', 'RN', 'PB', 'MA', 'AL', 'PI', 'SE', 'RO', 'TO', 'AC', 'AP', 'RR'];
+
+        if (state === 'DF'){
+            return 'DISTRITO_FEDERAL'
+        }
+
+        if (capitals.includes(state)){
+            return 'CAPITAL';
+        }
+
+        return 'MUNICIPIO';
+    }
+
     private getDestinationMultiplier(state: string): number {
         // DF = highest value
         if(state === 'DF') return 2.5;
